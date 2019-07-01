@@ -1,0 +1,354 @@
+<html>
+  <head>
+    <title>Tatting.Paint</title>
+	<script src="js/fabric.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/FileSaver.js"></script>
+<style>
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+}
+
+[type="file"] + label {
+}
+</style>
+  </head>
+  <body>
+
+<input type="button" id="selection_clone" name="selection_clone" value="Clona"</>
+<input type="button" id="selection_delete" name="selection_delete" value="Elimina"</>
+<select id="new_object_select" name="new_object_select">
+  <option value="simpleCurve" >Curva</option>
+  <option value="singleNode">Nodo singolo</option>
+  <option value="doublePicotNode">Nodo doppio con picot</option>
+</select>
+<input type="button" id="object_new" name="object_new" value="Aggiungi"</>
+<input type="button" id="canvas_undo" name="canvas_undo" value="Annulla"</>
+<input type="button" id="canvas_clear" name="canvas_clear" value="Cancella tutto"</>
+<input type="file" id="file_open" name="file_open" accept=".tat">
+<label for="file_open" />Apri file</label>
+<input type="button" id="file_save" name="file_save" value="Salva file"/>
+<input type="color" value="#FF0000" id="colorPicker">
+<canvas id="canvas" width="1900" height="900" style="border:1px solid #000000"</canvas>
+
+    <script>
+var state = [];
+
+$(function() {
+
+var canvas = new fabric.Canvas('canvas', {
+    backgroundColor: null
+});
+
+canvasReset();
+updateModifications(true);
+var lastUndoStateIdx=0; // Last index used of undo states
+simpleCurve='<g transform="matrix(1 0 0 1 163.5 69.75)"  ><path style="stroke: rgb(255,0,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"  transform=" translate(-87.5, -68.75)" d="M 25 50 C 25 100 150 100 150 50" stroke-linecap="round" /></g>';
+singleNode='<g fill="none" stroke="#000"><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/></g>';
+doublePicotNode='<g fill="none" stroke="#000"><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path transform="matrix(.76615 0 0 .62499 26.183 19.496)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 30.238 19.496)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 17.155 13.869)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path d="M51.575-37.419a9.324 5.48 0 0 1-9.41-2.435 9.324 5.48 0 0 1 .124-6.044 9.324 5.48 0 0 1 9.508-2.301" transform="matrix(-.00618 .99998 -.99982 -.019 0 0)" stroke-width=".6"/><path d="M49.062 53.808a7.918 11.695 0 0 0-1.237-15.327 7.918 11.695 0 0 0-10.45-.165A7.918 11.695 0 0 0 35.917 53.6" stroke-width=".588"/></g>';
+
+//************************************************************************
+// * My fabric.js defaults i.e. you can only rotate objects and groups
+//************************************************************************
+
+fabric.Group.prototype.lockScalingX = true;
+fabric.Group.prototype.lockScalingY = true;
+fabric.Group.prototype.borderColor= 'red';
+fabric.Group.prototype.cornerColor= 'green';
+fabric.Group.prototype.cornerSize= 8;
+fabric.Group.prototype.transparentCorners= false;
+fabric.Group.prototype.snapAngle= 5;
+fabric.Group.prototype._controlsVisibility = {tl: false, tr: false, br: false, bl: false, ml: false, mt: false, mr: false, mb: false, mtr: true};
+fabric.Object.prototype.lockScalingX = true;
+fabric.Object.prototype.lockScalingY = true;
+fabric.Object.prototype.borderColor= 'red';
+fabric.Object.prototype.cornerColor= 'green';
+fabric.Object.prototype.cornerSize= 8;
+fabric.Object.prototype.transparentCorners= false;
+fabric.Object.prototype.snapAngle= 5;
+fabric.Object.prototype._controlsVisibility = {tl: false, tr: false, br: false, bl: false, ml: false, mt: false, mr: false, mb: false, mtr: true};
+
+//************************************************************************
+// * Canvas reset
+//************************************************************************
+    function canvasReset() {
+    var imageUrl = "./img/graph-paper.png";
+    canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
+    backgroundImageOpacity: 0.5,
+    backgroundImageStretch: false
+    });
+}
+
+//************************************************************************
+// * Use CTRL-Z keys to undo action 
+// * Use DEL key to delete selected object 
+// * Use CTRL-V keys to clone selected object 
+//************************************************************************
+$('html').keyup(function(e){
+        if(e.keyCode == 90) { 
+           canvasUndo();
+        }
+        if(e.keyCode == 46) { 
+            deleteSelectedObjectsFromCanvas();
+        }
+        if(e.keyCode == 86) {
+            if(e.ctrlKey) 
+                {
+                    Copy();
+                    Paste();
+                }
+        }
+});    
+
+//************************************************************************
+// * On object selected event (not used)
+//************************************************************************
+canvas.on('object:selected', function(o){
+    var activeObj = o.target;
+}); 
+
+//************************************************************************
+// * On new object addet to canvas, select it
+//************************************************************************
+canvas.on('object:added', function(o) {
+canvas.setActiveObject(o.target);
+});
+
+//************************************************************************
+// * On modifications to canvas, save the current state
+//************************************************************************
+canvas.on(
+'object:modified', function () {
+//console.log('object modified');
+  updateModifications(true);
+},
+'object:added', function () {
+//console.log('object added');
+  updateModifications(true);
+});
+
+function updateModifications(savehistory) {
+  if (savehistory === true) {
+//    myjson = canvas.toJSON();
+myjson=JSON.stringify(canvas);
+//console.log(myjson);
+    state.push(myjson);
+    lastUndoStateIdx = state.length-1;
+    if (lastUndoStateIdx<0) lastUndoStateIdx=0;
+  }
+}
+//************************************************************************
+// * DELETE object function
+//************************************************************************
+function deleteSelectedObjectsFromCanvas(){
+    var selection = canvas.getActiveObject();
+    if (typeof selection === "undefined") return;
+    if (selection == null) return;
+    if (selection.type === 'activeSelection') {
+        selection.forEachObject(function(element) {
+            console.log(element);
+            canvas.remove(element);
+            updateModifications(true);
+        });
+    }
+    else{
+        canvas.remove(selection);
+        updateModifications(true);
+    }
+    canvas.discardActiveObject();
+    canvas.requestRenderAll();
+}
+
+//************************************************************************
+// * COPY object function
+//************************************************************************
+    function Copy() {
+        // clone what are you copying since you
+        // may want copy and paste on different moment.
+        // and you do not want the changes happened
+        // later to reflect on the copy.
+        canvas.getActiveObject().clone(function(cloned) {
+            _clipboard = cloned;
+        });
+    }
+
+//************************************************************************
+// * COLORPICK function
+//************************************************************************
+    $("#colorPicker").change(function(){
+var toColor=this.value;
+	var selection = canvas.getActiveObject();
+    if (typeof selection === "undefined") return;
+    if (selection == null) return;
+	if (selection.type === 'activeSelection') {
+		selection.getObjects().forEach(function(obj) {
+			obj.set('stroke', toColor);
+		});
+	} else {
+		selection.set('stroke', toColor);
+	}
+	canvas.requestRenderAll();
+    });
+
+//************************************************************************
+// * PASTE object function
+//************************************************************************
+    function Paste() {
+        // clone again, so you can do multiple copies.
+        _clipboard.clone(function(clonedObj) {
+            canvas.discardActiveObject();
+            clonedObj.set({
+                left: clonedObj.left + 10,
+                top: clonedObj.top + 10,
+                evented: true,
+            });
+            if (clonedObj.type === 'activeSelection') {
+                // active selection needs a reference to the canvas.
+                clonedObj.canvas = canvas;
+                clonedObj.forEachObject(function(obj) {
+                    canvas.add(obj);
+                });
+                // this should solve the unselectability
+                clonedObj.setCoords();
+            } else {
+                canvas.add(clonedObj);
+            }
+            _clipboard.top += 10;
+            _clipboard.left += 10;
+            canvas.setActiveObject(clonedObj);
+            canvas.requestRenderAll();
+        });
+    }
+
+//************************************************************************
+// * Canvas UNDO function
+//************************************************************************
+    function canvasUndo() {
+    if (lastUndoStateIdx>0) {
+        canvasReset();
+        lastUndoStateIdx-=1;
+        canvas.loadFromJSON(state[lastUndoStateIdx]);
+        canvas.renderAll();
+        }
+   }
+
+
+//************************************************************************
+// * Button FILE_OPEN action
+//************************************************************************
+$(document).on('change','#file_open' , function(){
+         var file = document.querySelector('input[type=file]').files[0];
+         var reader = new FileReader()
+
+        var textFile = /text.*/;
+        reader.onload = function (event) {
+            canvasReset();
+            lastUndoStateIdx-=0;
+            canvas.loadFromJSON(event.target.result);
+            canvas.renderAll();
+            updateModifications(true);
+            var input = $("#file_open");
+            input.replaceWith(input.val('').clone(true));
+        }
+         reader.readAsText(file);
+    });
+
+
+//************************************************************************
+// * Button FILE_SAVE action
+// * Using window.saveAs instead of FileSaver.saveAs  https://github.com/eligrey/FileSaver.js/issues/421
+//************************************************************************
+    $("#file_save").click(function(){
+      //  var jsonse = JSON.stringify(state[state.length-1]);
+        var jsonse = state[state.length-1];
+        var blob = new Blob([jsonse], {type: "application/json"});
+        window.saveAs(blob, "new.tat");
+    });
+
+//************************************************************************
+// * Button CLONE action
+//************************************************************************
+    $("#selection_clone").click(function(){
+    var selection = canvas.getActiveObject();
+    if (typeof selection === "undefined") return;
+    if (selection == null) return;
+        Copy();
+        Paste();
+    });
+
+//************************************************************************
+// * Button DELETE action
+//************************************************************************
+    $("#selection_delete").click(function(){
+        deleteSelectedObjectsFromCanvas();
+    });
+
+//************************************************************************
+// * Button NEW_OBJECT action
+//************************************************************************
+    $("#object_new").click(function(){
+        var objToCreate=$( "#new_object_select" ).val();
+        fabric.loadSVGFromString(window[objToCreate], function (objects, options) {
+        group = fabric.util.groupSVGElements(objects, options);
+
+group.set({
+                left: 150,
+                top:200,
+                scaleX: 1.35,
+                scaleY:1.35
+            });
+
+
+        canvas.add(group);
+        cursor = group;
+        canvas.renderAll();
+        updateModifications(true);
+    });
+  });
+
+//************************************************************************
+// * Button UNDO action
+//************************************************************************
+    $("#canvas_undo").click(function(){
+        canvasUndo();
+    });
+
+
+//************************************************************************
+// * Button CLEAR CANVAS action
+//************************************************************************
+    $("#canvas_clear").click(function(){
+    if (confirm("Sei sicuro di voler cancellare tutto?")) {
+           canvas.clear();
+           canvasReset();
+           canvas.renderAll();
+    } else {
+     }
+
+    });
+
+
+//************************************************************************
+// * How-to creating svg strings from object definitions
+//************************************************************************
+//var path = new fabric.Path('M25,50 C25,100 150,100 150,50', {
+//left: 100,
+//top: 50,
+//stroke: 'red',
+//strokeWidth: 2,
+//fill: false,
+//scaleY:1,
+//});
+//var svgStr = path.toSVG();
+//console.log(svgStr);
+//canvas.add(path);   
+//************************************************************************
+
+});
+    </script>
+
+
+  </body>
+</html>
