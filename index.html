@@ -185,10 +185,24 @@ var toColor=this.value;
 	if (selection.type === 'activeSelection') {
 		selection.getObjects().forEach(function(obj) {
 			obj.set('stroke', toColor);
+            if (typeof(obj._objects) != "undefined") 
+            { 
+                obj.getObjects().forEach(function(obj2) {
+                        obj2.set('stroke', toColor);
+                });
+            }
 		});
-	} else {
+	} 
+    else 
+    {
 		selection.set('stroke', toColor);
-	}
+        if (typeof(selection._objects) != "undefined") 
+        { 
+            selection.getObjects().forEach(function(obj2) {
+                    obj2.set('stroke', toColor);
+            });
+        }
+    }
 	canvas.requestRenderAll();
     });
 
@@ -302,6 +316,7 @@ group.set({
 
 
         canvas.add(group);
+console.log(group);
         cursor = group;
         canvas.renderAll();
         updateModifications(true);
