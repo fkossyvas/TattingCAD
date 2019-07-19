@@ -19,7 +19,7 @@
   width: 100%;
   padding-left: 10px;
   box-sizing: border-box;
-  height: 66px;
+  height: 56px;
   border-top: 1px solid #BDBDBD;
   border-bottom: 1px solid #BDBDBD;
   background-color: #F2F2F2;
@@ -70,7 +70,7 @@
   border-left: 1px solid #BDBDBD;
   width: 8px;
   margin-left: 8px;
-  height: 66px; }
+  height: 56px; }
 
 .gt-dropdown {
   width: 38px; }
@@ -80,7 +80,7 @@
   padding-left: 4px; }
 
 .gt-input > input {
-  width: 66px;
+  width: 56px;
   height: 23px;
   font-size: 14px;
   color: #585858; }

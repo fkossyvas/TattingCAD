@@ -83,8 +83,8 @@ align-items: center;
   #toolbar-simple-node {
     background-image: url("../icons/simple-node.png");
   }
-  #toolbar-node-with-picot {
-    background-image: url("../icons/node-with-picot.png");
+  #toolbar-picot {
+    background-image: url("../icons/picot.png");
   }
   #toolbar-zoom-in {
     background-image: url("../icons/zoom-in.png");

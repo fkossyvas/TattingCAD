@@ -9,7 +9,7 @@ updateModifications(true);
 var lastUndoStateIdx=0; // Last index used of undo states
 //simpleCurve='<g transform="matrix(1 0 0 1 163.5 69.75)"  ><path style="stroke: rgb(255,0,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"  transform=" translate(-87.5, -68.75)" d="M 25 50 C 25 100 150 100 150 50" stroke-linecap="round" /></g>';
 simpleNode='<g fill="none" stroke="#000"><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/></g>';
-nodeWithPicot='<g fill="none" stroke="#000"><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path transform="matrix(.76615 0 0 .62499 26.183 19.496)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 30.238 19.496)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 17.155 13.869)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path d="M51.575-37.419a9.324 5.48 0 0 1-9.41-2.435 9.324 5.48 0 0 1 .124-6.044 9.324 5.48 0 0 1 9.508-2.301" transform="matrix(-.00618 .99998 -.99982 -.019 0 0)" stroke-width=".6"/><path d="M49.062 53.808a7.918 11.695 0 0 0-1.237-15.327 7.918 11.695 0 0 0-10.45-.165A7.918 11.695 0 0 0 35.917 53.6" stroke-width=".588"/></g>';
+picot='<g fill="none" stroke="#000"><path transform="rotate(90.607) skewX(-.029)" d="M52.048-37.646a5.443 5.48 0 0 1-5.493-2.436 5.443 5.48 0 0 1 .073-6.043 5.443 5.48 0 0 1 5.55-2.3" stroke-width=".458"/><path d="M49.11 53.814a7.976 6.804 0 0 0-1.246-8.917 7.976 6.804 0 0 0-10.527-.096 7.976 6.804 0 0 0-1.47 8.892" stroke-width=".45"/></g>';
 var canCurveDrawing=false;
 var isCurveDrawing=false;
 //************************************************************************
@@ -20,7 +20,7 @@ fabric.Group.prototype.lockScalingX = true;
 fabric.Group.prototype.lockScalingY = true;
 fabric.Group.prototype.borderColor= 'red';
 fabric.Group.prototype.cornerColor= 'green';
-fabric.Group.prototype.cornerSize= 10;
+fabric.Group.prototype.cornerSize= 20;
 fabric.Group.prototype.transparentCorners= false;
 fabric.Group.prototype.snapAngle= 5;
 fabric.Group.prototype._controlsVisibility = {tl: false, tr: false, br: false, bl: false, ml: false, mt: false, mr: false, mb: false, mtr: true};
@@ -28,7 +28,7 @@ fabric.Object.prototype.lockScalingX = true;
 fabric.Object.prototype.lockScalingY = true;
 fabric.Object.prototype.borderColor= 'red';
 fabric.Object.prototype.cornerColor= 'green';
-fabric.Object.prototype.cornerSize= 10;
+fabric.Object.prototype.cornerSize= 20;
 fabric.Object.prototype.transparentCorners= false;
 fabric.Object.prototype.snapAngle= 5;
 fabric.Object.prototype._controlsVisibility = {tl: false, tr: false, br: false, bl: false, ml: false, mt: false, mr: false, mb: false, mtr: true};
@@ -317,6 +317,34 @@ if (selection == null) return;
 });
 
 //************************************************************************
+// * Button GROUP action
+//************************************************************************
+registerButton($("#toolbar-group"), function() {
+    if (!canvas.getActiveObject()) {
+      return;
+    }
+    if (canvas.getActiveObject().type !== 'activeSelection') {
+      return;
+    }
+    canvas.getActiveObject().toGroup();
+    canvas.requestRenderAll();
+});
+
+//************************************************************************
+// * Button UNGROUP action
+//************************************************************************
+registerButton($("#toolbar-ungroup"), function() {
+    if (!canvas.getActiveObject()) {
+      return;
+    }
+    if (canvas.getActiveObject().type !== 'group') {
+      return;
+    }
+    canvas.getActiveObject().toActiveSelection();
+    canvas.requestRenderAll();
+});
+
+//************************************************************************
 // * Button ZOOM-IN action
 //************************************************************************
 registerButton($("#toolbar-zoom-in"), function() {
@@ -348,11 +376,20 @@ registerButton($("#toolbar-delete"), function() {
 // * Button ARC action
 //************************************************************************
 registerToggleButton($("#toolbar-arc"), function() {
-// set strong font weight
-canCurveDrawing=true;
+    // set strong font weight
+    canCurveDrawing=true;
+    canvas.discardActiveObject().renderAll();
+    canvas.selection = false;
+    canvas.forEachObject(function(o) {
+      o.selectable = false;
+    });
 }, function() {
-// set normal font weight
-canCurveDrawing=false;
+    // set normal font weight
+    canCurveDrawing=false;
+    canvas.selection = true;
+    canvas.forEachObject(function(o) {
+      o.selectable = true;
+    });
 });
 //************************************************************************
 // * Button SIMPLE-NODE action
@@ -374,10 +411,10 @@ registerButton($("#toolbar-simple-node"), function() {
 });
 
 //************************************************************************
-// * Button NODE-WITH-PICOT action
+// * Button PICOT action
 //************************************************************************
-registerButton($("#toolbar-node-with-picot"), function() {
-    fabric.loadSVGFromString(nodeWithPicot, function (objects, options) {
+registerButton($("#toolbar-picot"), function() {
+    fabric.loadSVGFromString(picot, function (objects, options) {
     group = fabric.util.groupSVGElements(objects, options);
     group.set({
                 left: 150,
