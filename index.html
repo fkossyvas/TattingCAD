@@ -8,10 +8,10 @@
     <!-- Material Design Lite for Tooltips -->
     <link rel="stylesheet" href="css/material.indigo-pink.min.css" />
     <script src="js/material.min.js"></script>
-    <!-- Toolbar Library -->
+    <!-- Toolbars Library https://github.com/danielktaylor/gToolbars.js -->
     <link rel="stylesheet" type="text/css" href="css/gToolbars-0.2.0.css" />
     <script src="js/gToolbars-0.2.0.js"></script>
-    <!-- FileSaver -->
+    <!-- FileSaver https://github.com/eligrey/FileSaver.js/ -->
     <script src="js/FileSaver.js"></script>
     <!-- Main app -->
     <link rel="stylesheet" href="css/tatting.css" />
@@ -60,7 +60,9 @@
         <div id="toolbar-clear" class="gt-button"></div>
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-clear">Cancella tutto</div>
         <div class="gt-separator"></div>
-        <div class="btn-wrapper-div"><input class="colorPickerBtn" type="color" value="#FF0000" id="colorPicker"></div>
+        <div id="toolbar-colors" class="gt-button"></div>
+        <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-colors">Colore</div>
+        <input class="colorPickerBtn" type="color" value="#FF0000" id="colorPicker" style="display:none">
 
       </div>
       <!-- /toolbar -->

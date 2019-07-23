@@ -13,12 +13,12 @@ picot='<g fill="none" stroke="#000"><path transform="rotate(90.607) skewX(-.029)
 var canCurveDrawing=false;
 var isCurveDrawing=false;
 
-var simpleNodeImgWidth=6;
-var simpleNodeImgHeight=13;
+var simpleNodeImgWidth=12;
+var simpleNodeImgHeight=24;
 var simpleNodeScale=1.2;
 var curveShapeCurvature=0.4;
+var curveShapeCurvature=0.4;
 var curveLinePreview;
-var curvePreview;
 var curveShapeArray=[];
 
 //************************************************************************
@@ -366,6 +366,7 @@ registerButton($("#toolbar-ungroup"), function() {
       return;
     }
     canvas.getActiveObject().toActiveSelection();
+    canvas.getActiveObject().toGroup();
 console.log('ACTION:ungroup objects');
     canvas.requestRenderAll();
 });
@@ -511,7 +512,7 @@ canvas.on('mouse:down', function (o) {
 
         curveLinePreview = new fabric.Line(points, {
             strokeWidth: 3,
-            stroke: 'green'
+            stroke: 'black'
         });
         canvas.add(curveLinePreview);
     }
@@ -522,11 +523,6 @@ canvas.on('mouse:move', function (o) {
     if (isCurveDrawing) {
         var pointer = canvas.getPointer(o.e);
         curveLinePreview.set({ x2: pointer.x, y2: pointer.y });
-        canvas.remove(curvePreview);
-        curveShapeArray.length = 0;
-        drawShapeCurve(curveLinePreview.x1,curveLinePreview.y1,curveLinePreview.x2,curveLinePreview.y2);
-        curvePreview = new fabric.Group(curveShapeArray, { x1: curveLinePreview.x1, x2: curveLinePreview.x2, y1: curveLinePreview.y1, y2: curveLinePreview.y2 });
-        canvas.add(curvePreview);
         canvas.renderAll();
     }
 });
@@ -537,26 +533,16 @@ canvas.on('mouse:up', function (o) {
         canCurveDrawing=false;        
         curveShapeArray.length = 0; 
         toggle($("#toolbar-arc"), true);
-        canvas.remove(curvePreview);
         drawShapeCurve(curveLinePreview.x1,curveLinePreview.y1,curveLinePreview.x2,curveLinePreview.y2);
-        curvePreview = new fabric.Group(curveShapeArray, { x1: curveLinePreview.x1, x2: curveLinePreview.x2, y1: curveLinePreview.y1, y2: curveLinePreview.y2 });
+        var newgroup = new fabric.Group(curveShapeArray, { x1: curveLinePreview.x1, x2: curveLinePreview.x2, y1: curveLinePreview.y1, y2: curveLinePreview.y2 });
         canvas.remove(curveLinePreview);
-        canvas.add(curvePreview);
+        canvas.add(newgroup);
         canvas.renderAll();
-        console.log('ACTION:add arc');
+console.log('ACTION:add arc');
+
         updateModifications(true);
     }
 });
-
-canvas.on('mouse:wheel', function(opt) {
-    if (isCurveDrawing) {
-        var delta = opt.e.deltaY;
-        console.log('Mouse wheel delta:'+delta);
-
-        opt.e.preventDefault();
-        opt.e.stopPropagation();
-    }
-})
 
 function drawShapeCurve(startx, starty, endx, endy) {
     var startPoint = {

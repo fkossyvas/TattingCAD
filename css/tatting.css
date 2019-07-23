@@ -101,4 +101,7 @@ align-items: center;
   #toolbar-group {
     background-image: url("../icons/group.png");
   }
+  #toolbar-colors {
+    background-image: url("../icons/colors.png");
+  }
 
