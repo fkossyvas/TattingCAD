@@ -104,4 +104,13 @@ align-items: center;
   #toolbar-colors {
     background-image: url("../icons/colors.png");
   }
+  #toolbar-text-box {
+    background-image: url("../icons/text-box.png");
+  }
+  #toolbar-font-size-increase {
+    background-image: url("../icons/font-size-increase.png");
+  }
+  #toolbar-font-size-decrease {
+    background-image: url("../icons/font-size-decrease.png");
+  }
 
