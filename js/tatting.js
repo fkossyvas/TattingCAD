@@ -8,7 +8,7 @@ $(function()
 		backgroundColor: null,
 		preserveObjectStacking: true
 	});
-    fabric.Object.prototype.objectCaching = true;
+	fabric.Object.prototype.objectCaching = true;
 	canvasReset();
 	updateModifications(true);
 
@@ -31,7 +31,7 @@ $(function()
 	var mousePosX;
 	var mousePosY;
 
-    var debugOn=false;
+	var debugOn = false;
 
 	//************************************************************************
 	// * My fabric.js defaults i.e. you can only rotate objects and groups
@@ -215,11 +215,21 @@ $(function()
 			top: y,
 			backgroundColor: 'white',
 			objecttype: 'text',
-            lockScalingX :false,
-            lockScalingY: false,
-            hasControls:true
+			lockScalingX: false,
+			lockScalingY: false,
+			hasControls: true
 		});
-        text.setControlsVisibility({'tl': true, 'tr': true, 'bl': true, 'mb': true, 'mr': true,'ml': true, 'br': true, 'mt': true});
+		text.setControlsVisibility(
+		{
+			'tl': true,
+			'tr': true,
+			'bl': true,
+			'mb': true,
+			'mr': true,
+			'ml': true,
+			'br': true,
+			'mt': true
+		});
 		canvas.add(text);
 		canvas.renderAll();
 		updateModifications(true);
@@ -555,7 +565,7 @@ $(function()
 		deleteSelectedObjectsFromCanvas();
 	});
 
-	
+
 	//************************************************************************
 	// * Button ARC action
 	//************************************************************************
