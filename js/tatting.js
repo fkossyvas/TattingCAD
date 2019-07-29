@@ -11,8 +11,8 @@ $(function()
     fabric.Object.prototype.objectCaching = true;
 	canvasReset();
 	updateModifications(true);
+
 	var lastUndoStateIdx = 0; // Last index used of undo states
-	//simpleCurve='<g transform="matrix(1 0 0 1 163.5 69.75)"  ><path style="stroke: rgb(255,0,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"  transform=" translate(-87.5, -68.75)" d="M 25 50 C 25 100 150 100 150 50" stroke-linecap="round" /></g>';
 	simpleNode = '<g fill="none" stroke="#000"><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/><path transform="matrix(.76615 0 0 .62499 17.985 19.709)" d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" stroke-width=".723"/><path d="M21.608 58.434c-.441 3.528-.441 10.583-.22 14.111.22 3.528.66 3.528 1.322 3.528h2.205c.662 0 1.103 0 1.323-3.526.22-3.526.22-10.585-.22-14.113-.441-3.528-1.323-3.528-1.764-3.528h-.882c-.441 0-1.323 0-1.764 3.528z" transform="matrix(.76615 0 0 .62499 22.04 19.709)" stroke-width=".723"/><path transform="matrix(1.00496 0 0 .76423 8.956 14.082)" d="M26.458 52.26c.882-1.323 1.764-2.646 2.646-2.646.882 0 1.764 1.323 2.646 2.646" stroke-width=".571"/></g>';
 	picot = '<g fill="none" stroke="#000"><path transform="rotate(90.607) skewX(-.029)" d="M52.048-37.646a5.443 5.48 0 0 1-5.493-2.436 5.443 5.48 0 0 1 .073-6.043 5.443 5.48 0 0 1 5.55-2.3" stroke-width=".458"/><path d="M49.11 53.814a7.976 6.804 0 0 0-1.246-8.917 7.976 6.804 0 0 0-10.527-.096 7.976 6.804 0 0 0-1.47 8.892" stroke-width=".45"/></g>';
 	var canSimpleNodeDraw = false;
@@ -30,6 +30,8 @@ $(function()
 	var curveShapeArray = [];
 	var mousePosX;
 	var mousePosY;
+
+    var debugOn=false;
 
 	//************************************************************************
 	// * My fabric.js defaults i.e. you can only rotate objects and groups
@@ -97,7 +99,6 @@ $(function()
 	//************************************************************************
 	$('html').keyup(function(e)
 	{
-		//console.log(e.keyCode);
 		if (e.keyCode == 90)
 		{
 			canvasUndo();
@@ -131,13 +132,13 @@ $(function()
 		'object:modified',
 		function()
 		{
-			console.log('ACTION:object modified');
+			if (debugOn) console.log('DBG:ACTION:object modified');
 			updateModifications(true);
 		},
 		'object:added',
 		function()
 		{
-			console.log('ACTION:object added');
+			if (debugOn) console.log('DBG:ACTION:object added');
 			updateModifications(true);
 		});
 
@@ -147,9 +148,8 @@ $(function()
 		{
 			//    myjson = canvas.toJSON();
 			myjson = JSON.stringify(canvas);
-			//console.log(myjson);
 			state.push(myjson);
-			console.log('OPERATION:update history');
+			if (debugOn) console.log('DBG:OPERATION:update history');
 			lastUndoStateIdx = state.length - 1;
 			if (lastUndoStateIdx < 0) lastUndoStateIdx = 0;
 		}
@@ -175,7 +175,7 @@ $(function()
 			canvas.add(group);
 			cursor = group;
 			canvas.renderAll();
-			console.log('ACTION:add simple node');
+			if (debugOn) console.log('DBG:ACTION:add simple node');
 			updateModifications(true);
 		});
 	};
@@ -198,7 +198,7 @@ $(function()
 			canvas.add(group);
 			cursor = group;
 			canvas.renderAll();
-			console.log('ACTION:add picot');
+			if (debugOn) console.log('DBG:ACTION:add picot');
 			updateModifications(true);
 		});
 	};
@@ -214,11 +214,16 @@ $(function()
 			left: x,
 			top: y,
 			backgroundColor: 'white',
-			objecttype: 'text'
+			objecttype: 'text',
+            lockScalingX :false,
+            lockScalingY: false,
+            hasControls:true
 		});
+        text.setControlsVisibility({'tl': true, 'tr': true, 'bl': true, 'mb': true, 'mr': true,'ml': true, 'br': true, 'mt': true});
 		canvas.add(text);
 		canvas.renderAll();
-
+		updateModifications(true);
+		if (debugOn) console.log('DBG:ACTION:add textbox');
 	};
 
 	//************************************************************************
@@ -233,9 +238,8 @@ $(function()
 		{
 			selection.forEachObject(function(element)
 			{
-				console.log(element);
 				canvas.remove(element);
-				console.log('ACTION:object deleted');
+				if (debugOn) console.log('DBG:ACTION:object deleted');
 				updateModifications(true);
 
 
@@ -244,7 +248,7 @@ $(function()
 		else
 		{
 			canvas.remove(selection);
-			console.log('ACTION:object deleted');
+			if (debugOn) console.log('DBG:ACTION:object deleted');
 			updateModifications(true);
 		}
 		canvas.discardActiveObject();
@@ -301,8 +305,6 @@ $(function()
 			selection.set('stroke', toColor);
 			if (typeof(selection._objects) != "undefined")
 			{
-				console.log('due');
-
 				selection.getObjects().forEach(function(obj2)
 				{
 					obj2.set('stroke', toColor);
@@ -317,7 +319,7 @@ $(function()
 			}
 		}
 		canvas.requestRenderAll();
-		console.log('ACTION:object color change');
+		if (debugOn) console.log('DBG:ACTION:object color change');
 		updateModifications(true);
 	});
 
@@ -355,7 +357,7 @@ $(function()
 			_clipboard.left += 10;
 			canvas.setActiveObject(clonedObj);
 			canvas.requestRenderAll();
-			console.log('ACTION:object paste');
+			if (debugOn) console.log('DBG:ACTION:object paste');
 			updateModifications(true);
 		});
 	}
@@ -371,7 +373,7 @@ $(function()
 			lastUndoStateIdx -= 1;
 			canvas.loadFromJSON(state[lastUndoStateIdx]);
 			canvas.renderAll();
-			console.log('ACTION:undo');
+			if (debugOn) console.log('DBG:ACTION:undo');
 
 		}
 	}
@@ -383,7 +385,7 @@ $(function()
 	{
 		var obj = canvas.getActiveObject();
 		canvas.sendBackwards(obj);
-		console.log('ACTION:object send backwards');
+		if (debugOn) console.log('DBG:ACTION:object send backwards');
 
 	}
 
@@ -394,7 +396,7 @@ $(function()
 	{
 		var obj = canvas.getActiveObject();
 		canvas.bringForward(obj);
-		console.log('ACTION:object bring forward');
+		if (debugOn) console.log('DBG:ACTION:object bring forward');
 
 	}
 
@@ -427,49 +429,6 @@ $(function()
 	}
 
 	//************************************************************************
-	// * Textbox Font increase function
-	//************************************************************************
-	function fontSizeIncrease()
-	{
-		var obj = canvas.getActiveObject();
-		var tmp = obj.fontSize;
-		tmp += 2;
-		obj.set(
-		{
-			scaleX: 1,
-			scaleY: 1,
-			fontSize: tmp
-		});
-		canvas.renderAll();
-		updateModifications(true);
-		console.log('ACTION:Textsize increase');
-	}
-
-	//************************************************************************
-	// * Textbox Font decrease function
-	//************************************************************************
-	function fontSizeDecrease()
-	{
-		var obj = canvas.getActiveObject();
-		var tmp = obj.fontSize;
-		tmp -= 2;
-		if (tmp < 6)
-		{
-			tmp = 6;
-		}
-		obj.set(
-		{
-			scaleX: 1,
-			scaleY: 1,
-			fontSize: tmp
-		});
-		canvas.renderAll();
-		updateModifications(true);
-		updateModifications(true);
-		console.log('ACTION:Textsize decrease');
-	}
-
-	//************************************************************************
 	// * Button FILE_OPEN action
 	//************************************************************************
 	$(document).on('change', '#file_open', function()
@@ -484,7 +443,7 @@ $(function()
 			lastUndoStateIdx -= 0;
 			canvas.loadFromJSON(event.target.result);
 			canvas.renderAll();
-			console.log('ACTION:file open');
+			if (debugOn) console.log('DBG:ACTION:file open');
 			updateModifications(true);
 			var input = $("#file_open");
 			input.replaceWith(input.val('').clone(true));
@@ -541,7 +500,7 @@ $(function()
 			return;
 		}
 		canvas.getActiveObject().toGroup();
-		console.log('ACTION:group objects');
+		if (debugOn) console.log('DBG:ACTION:group objects');
 		updateModifications(true);
 		canvas.requestRenderAll();
 	});
@@ -560,7 +519,7 @@ $(function()
 			return;
 		}
 		canvas.getActiveObject().toActiveSelection();
-		console.log('ACTION:ungroup objects');
+		if (debugOn) console.log('DBG:ACTION:ungroup objects');
 		canvas.requestRenderAll();
 	});
 
@@ -596,22 +555,7 @@ $(function()
 		deleteSelectedObjectsFromCanvas();
 	});
 
-	//************************************************************************
-	// * Button Font size increase action
-	//************************************************************************
-	registerButton($("#toolbar-font-size-increase"), function()
-	{
-		fontSizeIncrease();
-	});
-
-	//************************************************************************
-	// * Button Font size decrease action
-	//************************************************************************
-	registerButton($("#toolbar-font-size-decrease"), function()
-	{
-		fontSizeDecrease();
-	});
-
+	
 	//************************************************************************
 	// * Button ARC action
 	//************************************************************************
@@ -754,7 +698,7 @@ $(function()
 			canvas.clear();
 			canvasReset();
 			canvas.renderAll();
-			console.log('ACTION:clear canvas');
+			if (debugOn) console.log('DBG:ACTION:clear canvas');
 			updateModifications(true);
 
 		}
@@ -862,7 +806,7 @@ $(function()
 			canvas.remove(curveLinePreview);
 			canvas.add(curvePreview);
 			canvas.renderAll();
-			console.log('ACTION:add arc');
+			if (debugOn) console.log('DBG:ACTION:add arc');
 			updateModifications(true);
 		}
 		if (this.isDragging)
@@ -1012,21 +956,5 @@ $(function()
 	{
 		return angle * (180 / Math.PI);
 	}
-
-	//************************************************************************
-	// * How-to creating svg strings from object definitions
-	//************************************************************************
-	//var path = new fabric.Path('M25,50 C25,100 150,100 150,50', {
-	//left: 100,
-	//top: 50,
-	//stroke: 'red',
-	//strokeWidth: 2,
-	//fill: false,
-	//scaleY:1,
-	//});
-	//var svgStr = path.toSVG();
-	//console.log(svgStr);
-	//canvas.add(path);   
-	//************************************************************************
 
 });
