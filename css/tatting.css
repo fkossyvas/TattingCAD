@@ -17,17 +17,24 @@ align-items: center;
 
   /* --- arbitrary div container for the toolbar --- */
   #container {
-    width: 1900px;
-    height: 890px;
+    width: 1925px;
+    height: 1205px;
     background: #EEEEEE;
-    border: 1px solid #BDBDBD;
+    border: 0px solid #FF0000;
     border-top: 0px;
-    margin: auto;
+    margin:42px 0px 0px 0px;
   }
 
   #toggle-arc {
     margin-left: 100px;
   }
+
+@media print
+{
+.noprint {display:none;}
+body {margin:0px;}
+.container  {margin:auto;}
+}
 
   /* --- button sizes --- */
 

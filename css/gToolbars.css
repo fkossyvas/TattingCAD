@@ -19,7 +19,7 @@
   width: 100%;
   padding-left: 10px;
   box-sizing: border-box;
-  height: 56px;
+  height: 42px;
   border-top: 1px solid #BDBDBD;
   border-bottom: 1px solid #BDBDBD;
   background-color: #F2F2F2;
@@ -28,10 +28,10 @@
 
 .gt-button {
   float: left;
-  min-width: 46px;
-  height: 46px;
+  min-width: 36px;
+  height: 36px;
   margin-top: 3px;
-  background-size: 44px 44px;
+  background-size: 32px 32px;
   background-repeat: no-repeat;
   background-position: 1px 1px;
   border-radius: 2px;
@@ -39,7 +39,7 @@
   border: 1px solid transparent;
   color: #585858;
   font-weight: 400;
-  line-height: 46px; }
+  line-height: 36px; }
   .gt-button:hover {
     border: 1px solid #CCCCCC;
     box-shadow: 1px 1px 1px #dadada;
@@ -70,7 +70,7 @@
   border-left: 1px solid #BDBDBD;
   width: 8px;
   margin-left: 8px;
-  height: 56px; }
+  height: 42px; }
 
 .gt-dropdown {
   width: 38px; }
