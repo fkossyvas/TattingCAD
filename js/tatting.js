@@ -27,8 +27,8 @@ $(function()
 	var simpleNodeImgHeight = 21;
 	var simpleNodeScale = 1.2;
 	var curveShapeCurvature = 0.4;
-	var arcCurvePreview;
-	var teardropCurvePreview;
+	var arcLine;
+	var teardropLine;
 	var curvePreview;
 	var curveShapeArray = [];
 	var mousePosX;
@@ -746,12 +746,11 @@ $(function()
 			var pointer = canvas.getPointer(o.e);
 			var points = [pointer.x, pointer.y, pointer.x, pointer.y];
 
-			arcCurvePreview = new fabric.Line(points,
+			arcLine = new fabric.Line(points,
 			{
 				strokeWidth: 3,
 				stroke: 'green'
 			});
-			canvas.add(arcCurvePreview);
 		}
 		if (canTeardropDraw)
 		{
@@ -759,12 +758,11 @@ $(function()
 			var pointer = canvas.getPointer(o.e);
 			var points = [pointer.x, pointer.y, pointer.x, pointer.y];
 
-			teardropCurvePreview = new fabric.Line(points,
+			teardropLine = new fabric.Line(points,
 			{
 				strokeWidth: 3,
 				stroke: 'green'
 			});
-			canvas.add(teardropCurvePreview);
 		}
 		if (canSimpleNodeDraw)
 		{
@@ -803,40 +801,40 @@ $(function()
 		mousePosY = Math.round(mousePosY);
 		if (isArcDrawing)
 		{
-			arcCurvePreview.set(
+			arcLine.set(
 			{
 				x2: pointer.x,
 				y2: pointer.y
 			});
 			canvas.remove(curvePreview);
 			curveShapeArray.length = 0;
-			drawArc(arcCurvePreview.x1, arcCurvePreview.y1, arcCurvePreview.x2, arcCurvePreview.y2);
+			drawArc(arcLine.x1, arcLine.y1, arcLine.x2, arcLine.y2);
 			curvePreview = new fabric.Group(curveShapeArray,
 			{
-				x1: arcCurvePreview.x1,
-				x2: arcCurvePreview.x2,
-				y1: arcCurvePreview.y1,
-				y2: arcCurvePreview.y2
+				x1: arcLine.x1,
+				x2: arcLine.x2,
+				y1: arcLine.y1,
+				y2: arcLine.y2
 			});
 			canvas.add(curvePreview);
 			canvas.renderAll();
 		}
 		if (isTeardropDrawing)
 		{
-			teardropCurvePreview.set(
+			teardropLine.set(
 			{
 				x2: pointer.x,
 				y2: pointer.y
 			});
 			canvas.remove(curvePreview);
 			curveShapeArray.length = 0;
-			drawTeardrop(teardropCurvePreview.x1, teardropCurvePreview.y1, teardropCurvePreview.x2, teardropCurvePreview.y2);
+			drawTeardrop(teardropLine.x1, teardropLine.y1, teardropLine.x2, teardropLine.y2);
 			curvePreview = new fabric.Group(curveShapeArray,
 			{
-				x1: teardropCurvePreview.x1,
-				x2: teardropCurvePreview.x2,
-				y1: teardropCurvePreview.y1,
-				y2: teardropCurvePreview.y2
+				x1: teardropLine.x1,
+				x2: teardropLine.x2,
+				y1: teardropLine.y1,
+				y2: teardropLine.y2
 			});
 			canvas.add(curvePreview);
 			canvas.renderAll();
@@ -861,17 +859,17 @@ $(function()
 			curveShapeArray.length = 0;
 			toggle($("#toolbar-arc"), true);
 			canvas.remove(curvePreview);
-			drawArc(arcCurvePreview.x1, arcCurvePreview.y1, arcCurvePreview.x2, arcCurvePreview.y2);
+			drawArc(arcLine.x1, arcLine.y1, arcLine.x2, arcLine.y2);
 			curvePreview = new fabric.Group(curveShapeArray,
 			{
-				x1: arcCurvePreview.x1,
-				x2: arcCurvePreview.x2,
-				y1: arcCurvePreview.y1,
-				y2: arcCurvePreview.y2
+				x1: arcLine.x1,
+				x2: arcLine.x2,
+				y1: arcLine.y1,
+				y2: arcLine.y2
 			});
-			canvas.remove(arcCurvePreview);
 			canvas.add(curvePreview);
 			canvas.renderAll();
+			curvePreview = new fabric.Group([]);
 			if (debugOn) console.log('DBG:ACTION:add arc');
 			updateModifications(true);
 		}
@@ -882,17 +880,18 @@ $(function()
 			curveShapeArray.length = 0;
 			toggle($("#toolbar-teardrop"), true);
 			canvas.remove(curvePreview);
-			drawTeardrop(teardropCurvePreview.x1, teardropCurvePreview.y1, teardropCurvePreview.x2, teardropCurvePreview.y2);
+			drawTeardrop(teardropLine.x1, teardropLine.y1, teardropLine.x2, teardropLine.y2);
 			curvePreview = new fabric.Group(curveShapeArray,
 			{
-				x1: teardropCurvePreview.x1,
-				x2: teardropCurvePreview.x2,
-				y1: teardropCurvePreview.y1,
-				y2: teardropCurvePreview.y2
+				x1: teardropLine.x1,
+				x2: teardropLine.x2,
+				y1: teardropLine.y1,
+				y2: teardropLine.y2
 			});
-			canvas.remove(teardropCurvePreview);
+			canvas.remove(teardropLine);
 			canvas.add(curvePreview);
 			canvas.renderAll();
+			curvePreview = new fabric.Group([]);
 			if (debugOn) console.log('DBG:ACTION:add teardrop');
 			updateModifications(true);
 		}
