@@ -1053,17 +1053,25 @@ $(function()
 		};
 
 		var curveLength = Math.floor(bezierLength(startPoint, controlPoint1, controlPoint2, endPoint));
-
+/*
+		for (var t = simpleNodeImgWidth; t < curveLength-simpleNodeImgWidth; t += simpleNodeImgWidth)
+		{
+			var point = getBezierXYatT(startPoint, controlPoint1, controlPoint2, endPoint, t / curveLength);
+			var angle = getBezierAngle(startPoint, controlPoint1, controlPoint2, endPoint, t / curveLength);
+			angle = toDegrees(angle);
+			addRotatedImageToArray(point, angle);
+		}
+*/
+//new way-start
         var curvePointsArray = new Array();
         var lastx=-1;
         var lasty=-1;
-		for (var t = 0; t < curveLength-simpleNodeImgWidth; t += 1 )
+		for (var t = 0; t < curveLength; t += 1 )
 		{
 			var point = getBezierXYatT(startPoint, controlPoint1, controlPoint2, endPoint, t / curveLength);
             point.x = Math.floor(point.x);
             point.y = Math.floor(point.y);
-            var dist=Math.hypot(point.x-lastx,point.y-lasty);
-            if (dist >= simpleNodeImgWidth)
+            if (((point.x == lastx) && (point.y == lasty))==false)
             {
                 var angle = getBezierAngle(startPoint, controlPoint1, controlPoint2, endPoint, t / curveLength);
                 angle = toDegrees(angle);
@@ -1073,12 +1081,17 @@ $(function()
                 lasty=point.y;
             }
 		}
-		for (var t = 0; t < curvePointsArray.length; t += 1)
+        var distanceDone=0;
+        var stopLoopIdx=curveLength-simpleNodeImgWidth;
+		for (var t = simpleNodeImgWidth; t < curvePointsArray.length-simpleNodeImgWidth-1; t += simpleNodeImgWidth)
 		{
 			var point = curvePointsArray[t];
+console.log("curvePointsArray.length="+curvePointsArray.length+",t="+t+",distanceDone="+distanceDone+",curveLength="+curveLength);
 			var angle = curvePointsArray[t].angle;
 			addRotatedImageToArray(point, angle);
+            distanceDone+=simpleNodeImgWidth;
 		}
+//new way-end
 	}
 
 

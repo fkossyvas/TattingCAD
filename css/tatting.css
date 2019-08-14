@@ -1,117 +1,148 @@
 /* --- style file save input --- */
 
 [type="file"] {
-  height: 0;
-  overflow: hidden;
-  width: 0;
+	height: 0;
+	overflow: hidden;
+	width: 0;
 }
 
-[type="file"] + label {
+[type="file"]+label {}
+
+
+#colorPickerBtn {
+	display: flex;
+	align-items: center;
 }
 
-  
-  #colorPickerBtn {
-display: flex;
-align-items: center;
-  }
-
-  /* --- arbitrary div container for the toolbar --- */
-  #container {
-    width: 1925px;
-    height: 1205px;
-    background: #EEEEEE;
-    border: 0px solid #FF0000;
-    border-top: 0px;
-    margin:42px 0px 0px 0px;
-  }
-
-  #toggle-arc {
-    margin-left: 100px;
-  }
-
-@media print
-{
-.noprint {display:none;}
-body {margin:0px;}
-.container  {margin:auto;}
+/* --- arbitrary div container for the toolbar --- */
+#container {
+	width: 1925px;
+	height: 1205px;
+	background: #EEEEEE;
+	border: 0px solid #FF0000;
+	border-top: 0px;
+	margin: 42px 0px 0px 0px;
 }
 
-  /* --- button sizes --- */
+#toggle-arc {
+	margin-left: 100px;
+}
 
-  #toolbar-arrange {
-    width: 70px;
-  }
+@media print {
+	.noprint {
+		display: none;
+	}
 
-  #toolbar-font-family {
-    width: 100px;
-  }
+	body {
+		margin: 0px;
+	}
 
-  /* --- toolbar icons --- */
+	.container {
+		margin: auto;
+	}
+}
 
-  #toolbar-undo {
-    background-image: url("../icons/undo.png");
-  }
+/* --- button sizes --- */
 
-  #toolbar-clone {
-    background-image: url("../icons/clone.png");
-  }
+#toolbar-arrange {
+	width: 70px;
+}
 
-  #toolbar-delete {
-    background-image: url("../icons/delete.png");
-  }
+#toolbar-font-family {
+	width: 100px;
+}
 
-  #toolbar-shape {
-    background-image: url("../icons/shapes.png");
-  }
+/* --- toolbar icons --- */
 
-  #toolbar-file-open {
-    background-image: url("../icons/file-open.png");
-  }
+#toolbar-undo {
+	background-image: url("../icons/undo.png");
+}
 
-  #toolbar-file-save {
-    background-image: url("../icons/file-save.png");
-  }
+#toolbar-clone {
+	background-image: url("../icons/clone.png");
+}
 
-  #toolbar-bring-forward {
-    background-image: url("../icons/bring-forward.png");
-  }
+#toolbar-delete {
+	background-image: url("../icons/delete.png");
+}
 
-  #toolbar-send-backward {
-    background-image: url("../icons/send-backward.png");
-  }
+#toolbar-shape {
+	background-image: url("../icons/shapes.png");
+}
 
-  #toolbar-clear {
-    background-image: url("../icons/clear.png");
-  }
+#toolbar-file-open {
+	background-image: url("../icons/file-open.png");
+}
 
-  #toolbar-arc {
-    background-image: url("../icons/arc.png");
-  }
-  #toolbar-simple-node {
-    background-image: url("../icons/simple-node.png");
-  }
-  #toolbar-picot {
-    background-image: url("../icons/picot.png");
-  }
-  #toolbar-zoom-in {
-    background-image: url("../icons/zoom-in.png");
-  }
-  #toolbar-zoom-out {
-    background-image: url("../icons/zoom-out.png");
-  }  
-  #toolbar-zoom-reset {
-    background-image: url("../icons/zoom-reset.png");
-  }
-  #toolbar-ungroup {
-    background-image: url("../icons/ungroup.png");
-  }
-  #toolbar-group {
-    background-image: url("../icons/group.png");
-  }
-  #toolbar-colors {
-    background-image: url("../icons/colors.png");
-  }
-  #toolbar-text-box {
-    background-image: url("../icons/text-box.png");
-  }
+#toolbar-file-save {
+	background-image: url("../icons/file-save.png");
+}
 
+#toolbar-bring-forward {
+	background-image: url("../icons/bring-forward.png");
+}
+
+#toolbar-send-backward {
+	background-image: url("../icons/send-backward.png");
+}
+
+#toolbar-clear {
+	background-image: url("../icons/clear.png");
+}
+
+#toolbar-arc {
+	background-image: url("../icons/arc.png");
+}
+
+#toolbar-simple-node {
+	background-image: url("../icons/simple-node.png");
+}
+
+#toolbar-picot {
+	background-image: url("../icons/picot.png");
+}
+
+#toolbar-zoom-in {
+	background-image: url("../icons/zoom-in.png");
+}
+
+#toolbar-zoom-out {
+	background-image: url("../icons/zoom-out.png");
+}
+
+#toolbar-zoom-reset {
+	background-image: url("../icons/zoom-reset.png");
+}
+
+#toolbar-ungroup {
+	background-image: url("../icons/ungroup.png");
+}
+
+#toolbar-group {
+	background-image: url("../icons/group.png");
+}
+
+#toolbar-colors {
+	background-image: url("../icons/colors.png");
+}
+
+#toolbar-text-box {
+	background-image: url("../icons/text-box.png");
+}
+
+#toolbar-teardrop {
+	background-image: url("../icons/teardrop.png");
+}
+
+.gt-toolbar {
+  padding-left: 28px;
+    height: 42px;
+  z-index: 999; }
+
+.gt-button {
+  min-width: 26px;
+  background-size: 24px 24px;
+  line-height: 26px; }
+
+.gt-separator {
+  height: 36px; }

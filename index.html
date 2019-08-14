@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="css/material.indigo-pink.min.css" />
     <script src="js/material.min.js"></script>
     <!-- Toolbars Library https://github.com/danielktaylor/gToolbars.js -->
-    <link rel="stylesheet" type="text/css" href="css/gToolbars.css" />
+    <link rel="stylesheet" type="text/css" href="css/gToolbars-0.2.0.css" />
     <script src="js/gToolbars-0.2.0.js"></script>
     <!-- FileSaver https://github.com/eligrey/FileSaver.js/ -->
     <script src="js/FileSaver.js"></script>
+    <!-- Bezier.js https://github.com/Pomax/bezierjs-->
+    <script src="js/bezier.js"></script>
     <!-- Main app -->
     <link rel="stylesheet" href="css/tatting.css" />
     <script src="js/tatting.js"></script>
@@ -35,6 +37,8 @@
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-picot">Picot</div>
         <div id="toolbar-arc" class="gt-button"></div>
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-arc">Arco</div>
+        <div id="toolbar-teardrop" class="gt-button"></div>
+        <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-teardrop">Teardrop</div>
         <div id="toolbar-text-box" class="gt-button"></div>
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-text-box">Box di testo</div>
         <div class="gt-separator"></div>
@@ -65,9 +69,7 @@
         <div id="toolbar-clear" class="gt-button"></div>
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-clear">Cancella tutto</div>
       </div>
-      <!-- /toolbar -->
       <canvas id="canvas" width="1925" height="1205"></canvas>
     </div>
-    <!-- /container -->
   </body>
 </html>
