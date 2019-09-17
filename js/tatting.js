@@ -88,6 +88,8 @@ $(function()
 
 		;
 
+ $('#toolbar-colors').simpleColorPicker({ onChangeColor: function(color) { changeColor(color); } });
+
 		//************************************************************************
 		// * Canvas reset
 		//************************************************************************
@@ -343,9 +345,8 @@ $(function()
 		//************************************************************************
 		// * COLORPICK function
 		//************************************************************************
-		$("#colorPicker").change(function()
+		function changeColor(toColor)
 			{
-				var toColor = this.value;
 				var selection = canvas.getActiveObject();
 				if (typeof selection === "undefined") return;
 				if (selection == null) return;
@@ -409,8 +410,6 @@ $(function()
 				if (debugOn) console.log('DBG:ACTION:object color change');
 				updateModifications(true);
 			}
-
-		);
 
 		//************************************************************************
 		// * PASTE object function
@@ -895,7 +894,7 @@ $(function()
 		//************************************************************************
 		registerButton($("#toolbar-colors"), function()
 			{
-				$('#colorPicker').click();
+        //        changeColor();
 			}
 
 		);

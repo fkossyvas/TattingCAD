@@ -134,6 +134,10 @@
 	background-image: url("../icons/teardrop.png");
 }
 
+#toolbar-settings {
+	background-image: url("../icons/settings.png");
+}
+
 .gt-toolbar {
   padding-left: 28px;
     height: 42px;

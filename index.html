@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>TattingCAD</title>
-    <!-- Fabric.js library -->
+    <!-- Fabric.js library https://github.com/fabricjs/fabric.js-->
     <script src="js/fabric.js"></script>
     <!-- jQuery -->
     <script src="js/jquery-3.4.1.js"></script>
@@ -11,10 +11,13 @@
     <!-- Toolbars Library https://github.com/danielktaylor/gToolbars.js -->
     <link rel="stylesheet" type="text/css" href="css/gToolbars-0.2.0.css" />
     <script src="js/gToolbars-0.2.0.js"></script>
-    <!-- FileSaver https://github.com/eligrey/FileSaver.js/ -->
+    <!-- FileSaver https://github.com/eligrey/FileSaver.js -->
     <script src="js/FileSaver.js"></script>
-    <!-- Bezier.js https://github.com/Pomax/bezierjs-->
+    <!-- Bezier.js https://github.com/Pomax/bezierjs -->
     <script src="js/bezier.js"></script>
+    <!-- simple-color-picker https://github.com/rachel-carvalho/simple-color-picker -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.simple-color-picker.css" />
+    <script src="js/jquery.simple-color-picker.js"></script>
     <!-- Main app -->
     <link rel="stylesheet" href="css/tatting.css" />
     <script src="js/tatting.js"></script>
@@ -68,6 +71,9 @@
         <div class="gt-separator"></div>
         <div id="toolbar-clear" class="gt-button"></div>
         <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-clear">Cancella tutto</div>
+        <div class="gt-separator"></div>
+        <div id="toolbar-settings" class="gt-button"></div>
+        <div class="mdl-tooltip mdl-tooltip--large gt-noselect" for="toolbar-settings">Impostazioni</div>
       </div>
       <canvas id="canvas" width="1925" height="1205"></canvas>
     </div>
