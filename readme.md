@@ -4,18 +4,13 @@ Tatting Computer Aided Design
 
 ![](screenshot/screenshot.png)
 
-## ✨ Demo
-
-![](screenshot/demo.gif)
-
-<p align="center">
-![](screenshot/demo.gif)
-</p>
-
-
 ## 🚀 Usage
 
 Download the repository and open the index.html file using your web browser.
+
+## ✨ Demo
+
+![](screenshot/demo.gif)
 
 ## 🤝 Contributing
 
