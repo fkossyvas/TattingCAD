@@ -39,4 +39,4 @@ TattingCAD uses the following third-party libraries:
 - [jQuery JavaScript Library v3.4.1](https://jquery.com/)
 - [Very simple jQuery color picker](https://github.com/tkrotoff/jquery-simplecolorpicker)
 
-If you are a publisher and wish to license TaatingCAD for commercial usage, please contact the author for more information.
+If you are a publisher and wish to license TattingCAD for commercial usage, please contact the author for more information.
