@@ -1,11 +1,8 @@
 # TattingCAD
 Tatting Computer Aided Design
+> you can use this app to design your tatting creations.
 
 ![](screenshot/screenshot.png)
-
-<h1 align="center">TattingCAD </h1>
-
-> you can use this app to design your tatting creations.
 
 ## ✨ Demo
 
