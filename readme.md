@@ -17,9 +17,13 @@ Download the repository and open the index.html file using your web browser.
 Contributions, issues and feature requests are welcome.<br />
 Feel free to check [issues page](https://github.com/fkossyvas/TattingCAD/issues) if you want to contribute.<br />
 
-## Author
+## 🔲 TODO
 
-👤 **Fotios Kossyvas**
+Use the Preferences button to setup some variables by defualt such as initial zoom level, enable/disable zoom using mouse scroll wheel etc.
+
+## 👤 Author
+
+**Fotios Kossyvas**
 
 - Twitter: [@fkossyvas](https://twitter.com/fkossyvas)
 - Github: [@fkossyvas](https://github.com/fkossyvas)
@@ -38,5 +42,3 @@ TattingCAD uses the following third-party libraries:
 - [An HTML5 saveAs() FileSaver implementation](https://github.com/eligrey/FileSaver.js)
 - [jQuery JavaScript Library v3.4.1](https://jquery.com/)
 - [Very simple jQuery color picker](https://github.com/tkrotoff/jquery-simplecolorpicker)
-
-If you are a publisher and wish to license TattingCAD for commercial usage, please contact the author for more information.
