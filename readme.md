@@ -34,7 +34,7 @@ Please ⭐️ this repository if this project helped you!
 
 ## 📝 Copyright
 
-TattingCAD is Copyright © 2020 Fotios Kossyvas. It is distributed under the [Mozilla Public License version 2.0](https://www.mozilla.org/MPL/2.0/). A copy of the license is available in the distributed LICENSE file.
+TattingCAD is Copyright © 2020 Fotios Kossyvas. It is distributed under the [Apache License 2.0](https://github.com/fkossyvas/TattingCAD/blob/master/LICENSE). A copy of the license is available in the distributed LICENSE file.
 
 TattingCAD uses the following third-party libraries:
 - [Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser](https://github.com/fabricjs/fabric.js)
