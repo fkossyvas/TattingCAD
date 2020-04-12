@@ -19,7 +19,7 @@ Feel free to check [issues page](https://github.com/fkossyvas/TattingCAD/issues)
 
 ## 🔲 TODO
 
-Use the Preferences button to setup some variables by defualt such as initial zoom level, enable/disable zoom using mouse scroll wheel etc.
+Use the Preferences button to setup some variables by defualt such as initial zoom level, enable/disable zoom using mouse scroll wheel, enable/disable background grid etc.
 
 ## 👤 Author
 
